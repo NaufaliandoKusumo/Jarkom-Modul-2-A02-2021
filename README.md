@@ -405,3 +405,98 @@
 
 **Pada Loguetown**
 - Akses `www.super.franky.A02.com/js` dengan lynx.
+
+## Soal 14
+Dan Luffy meminta untuk web `www.general.mecha.franky.yyy.com` hanya bisa diakses dengan port 15000 dan port 15500.
+
+### Jawaban
+**Pada Skypie**
+- Pindah ke directory `/etc/apache2/sites-available`.
+- Copy file `000-default.conf` menjadi file `general.mecha.franky.A02.com.conf`.
+- Edit file `general.mecha.franky.A02.com.conf` 
+- Edit file `/etc/apache2/ports.conf` untuk mengaktifkan port 15000 dan port 15500
+- Aktifkan konfigurasi general.mecha.franky.A02.com.
+
+  ```
+  a2ensite general.mecha.franky.A02.com
+  ```
+- Restart apache.
+
+  ```
+  service apache2 restart
+  ```
+- Pindah ke directory `/var/www`.
+- Download file zip menggunakan `wget`.
+
+  ```
+  wget https://github.com/FeinardSlim/Praktikum-Modul-2-Jarkom/raw/main/general.mecha.franky.zip
+  ```
+- Lakukan unzip.
+
+  ```
+  unzip general.mecha.franky.zip
+  ```
+- Rename folder `general.mecha.franky` menjadi `general.mecha.franky.A02.com`
+
+**Pada Loguetown**
+- Buka `www.general.mecha.franky.A02.com` menggunakan lynx.
+- Buka `www.general.mecha.franky.A02.com:15000` menggunakan lynx.
+- Buka `www.general.mecha.franky.A02.com:15500` menggunakan lynx.
+
+## Soal 15
+Dengan authentikasi username `luffy` dan password `onepiece` dan file di `/var/www/general.mecha.franky.yyy`.
+
+### Jawaban
+**Pada Skypie**
+- Pindah ke directory `/etc/apache2/sites-available`.
+- Edit file `general.mecha.franky.A02.com.conf`
+- Jalankan perintah berikut untuk membuat akun autentikasi baru dengan username `luffy`. Kita akan diminta untuk memasukkan password baru dan confirm password tersebut diisi `onepiece`.
+
+  ```
+  htpasswd -c /etc/apache2/.htpasswd luffy
+  ```
+- Restart apache.
+
+  ```
+  service apache2 restart
+  ```
+
+**Pada Loguetown**
+- Buka `www.general.mecha.franky.A02.com:15000` menggunakan lynx.
+- 
+## Soal 16
+Dan setiap kali mengakses IP Skypie akan diahlikan secara otomatis ke `www.franky.yyy.com`.
+
+### Jawaban
+**Pada Skypie**
+- Pindah ke directory `/etc/apache2/sites-available`.
+- Edit file `000-default.conf`
+- Restart apache.
+
+  ```
+  service apache2 restart
+  ```
+
+**Pada Loguetown**
+- Buka `192.181.2.4` (IP Skypie) menggunakan lynx.
+
+## Soal 17
+Dikarenakan Franky juga ingin mengajak temannya untuk dapat menghubunginya melalui website `www.super.franky.yyy.com`, dan dikarenakan pengunjung web server pasti akan bingung dengan randomnya images yang ada, maka Franky juga meminta untuk mengganti request gambar yang memiliki substring `franky` akan diarahkan menuju `franky.png`.
+
+### Jawaban
+**Pada Skypie**
+- Jalankan perintah `a2enmod rewrite` untuk mengaktifkan module rewrite.
+- Restart apache dengan perintah `service apache2 restart`.
+- Tambahkan file baru `.htaccess` pada folder `/var/www/super.franky.A02.com`
+- Pindah ke directory `/etc/apache2/sites-available`.
+- Edit file `super.franky.A02.com.conf` agar file `.htaccess` dapat berjalan
+- Restart apache.
+
+  ```
+  service apache2 restart
+  ```
+
+**Pada Loguetown**
+- Buka `www.super.franky.A02.com/public/images/franky.png` menggunakan lynx.
+- Buka `www.super.franky.A02.com/public/images/eyeoffranky.jpg` menggunakan lynx.
+- Buka `www.super.franky.A02.com/public/images/background-frank.jpg` menggunakan lynx.
