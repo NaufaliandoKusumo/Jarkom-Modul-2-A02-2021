@@ -262,3 +262,146 @@
 - Pada *Loguetown* mengecek ping domain `general.mecha.franky.a02.com` dan `www.general.mecha.franky.a02.com`.
 
   ![image23](https://i.postimg.cc/ZKBr9Rmp/image.png)
+
+#### 8. Setelah melakukan konfigurasi server, maka dilakukan konfigurasi Webserver. Pertama dengan webserver www.franky.yyy.com. Pertama, luffy membutuhkan webserver dengan DocumentRoot pada /var/www/franky.yyy.com.
+
+**Pada Skypie**
+- Install aplikasi apache, PHP, dan libapache2-mod-php7.0.
+
+  ```
+  apt-get install apache2 -y
+  apt-get install php -y
+  apt-get install libapache2-mod-php7.0 -y
+  ```
+- Pindah ke directory `/etc/apache2/sites-available`.
+- Copy file `000-default.conf` menjadi file `franky.A02.com.conf`.
+- Edit file `franky.A02.com.conf` seperti pada gambar berikut:
+
+- Aktifkan konfigurasi franky.A02.com.
+
+  ```
+  a2ensite franky.A02.com
+  ```
+- Restart apache.
+
+  ```
+  service apache2 restart
+  ```
+- Download file zip dengan `wget`.
+
+  ```
+  wget https://github.com/FeinardSlim/Praktikum-Modul-2-Jarkom/raw/main/franky.zip
+  ```
+- Lakukan unzip.
+
+  ```
+  unzip franky.zip
+  ```
+- Rename folder `franky` menjadi `franky.A02.com` dan terdapat isi file seperti pada gambar berikut:
+
+**Pada Loguetown**
+- Install aplikasi lynx.
+
+  ```
+  apt-get install lynx -y
+  ```
+- Akses `www.franky.A02.com` dengan lynx.
+
+#### 9. Setelah itu, Luffy juga membutuhkan agar url www.franky.yyy.com/index.php/home dapat menjadi menjadi www.franky.yyy.com/home
+
+**Pada Skypie**
+- Jalankan perintah `a2enmod rewrite` untuk mengaktifkan module rewrite.
+- Restart apache dengan perintah `service apache2 restart`.
+- Tambahkan file baru `.htaccess` pada folder `/var/www/franky.A02.com`, di mana file tersebut akan dimodifikasi menjadi:
+
+- Pindah ke directory `/etc/apache2/sites-available`.
+- Edit file `franky.A02.com.conf` agar file `.htaccess` dapat berjalan seperti pada gambar berikut:
+
+- Restart apache.
+
+  ```
+  service apache2 restart
+  ```
+
+**Pada Loguetown**
+- Akses `www.franky.A02.com/home` dengan lynx.
+
+#### 10. Setelah itu, pada subdomain www.super.franky.yyy.com, Luffy membutuhkan penyimpanan aset yang memiliki DocumentRoot pada /var/www/super.franky.yyy.com
+
+**Pada Skypie**
+- Pindah ke directory `/etc/apache2/sites-available`.
+- Copy file `000-default.conf` menjadi file `super.franky.A02.com.conf`.
+- Edit file `super.franky.A02.com.conf` seperti pada gambar berikut:
+
+- Aktifkan konfigurasi super.franky.A02.com.
+
+  ```
+  a2ensite super.franky.A02.com
+  ```
+- Restart apache.
+
+  ```
+  service apache2 restart
+  ```
+- Pindah ke directory `/var/www`.
+- Download file zip dengan `wget`.
+
+  ```
+  wget https://github.com/FeinardSlim/Praktikum-Modul-2-Jarkom/raw/main/super.franky.zip
+  ```
+- Lakukan unzip.
+
+  ```
+  unzip super.franky.zip
+  ```
+- Rename folder `super.franky` menjadi `super.franky.A02.com` dan terdapat isi file seperti pada gambar berikut:
+
+**Pada Loguetown**
+- Akses `www.super.franky.A02.com` dengan lynx.
+
+#### 11. Akan tetapi, pada folder /public, Luffy ingin hanya dapat melakukan directory listing saja.
+
+**Pada Skypie**
+- Pindah ke directory `/etc/apache2/sites-available`.
+- Edit file `super.franky.A02.com.conf` seperti pada gambar berikut:
+
+- Restart apache.
+
+  ```
+  service apache2 restart
+  ```
+
+**Pada Loguetown**
+- Akses `www.super.franky.A02.com/public` dengan lynx.
+
+- Akses `www.super.franky.A02.com/public/css`, `www.super.franky.A02.com/public/images`, dan `www.super.franky.A02.com/public/js` dengan lynx.
+
+#### 12. Tidak hanya itu, Luffy juga menyiapkan error file 404.html pada folder /error untuk mengganti error kode pada apache
+
+**Pada Skypie**
+- Pindah ke directory `/etc/apache2/sites-available`.
+- Edit file `super.franky.A02.com.conf` seperti pada gambar berikut:
+
+- Restart apache.
+
+  ```
+  service apache2 restart
+  ```
+
+**Pada Loguetown**
+- Akses `www.super.franky.A02.com/publoc` (terdapat typo) dengan lynx.
+
+#### 13.  Luffy juga meminta Nami untuk dibuatkan konfigurasi virtual host. Virtual host ini bertujuan untuk dapat mengakses file asset www.super.franky.yyy.com/public/js menjadi www.super.franky.yyy.com/js.
+
+**Pada Skypie**
+- Pindah ke directory `/etc/apache2/sites-available`.
+- Edit file `super.franky.A02.com.conf` seperti pada gambar berikut:
+
+- Restart apache.
+
+  ```
+  service apache2 restart
+  ```
+
+**Pada Loguetown**
+- Akses `www.super.franky.A02.com/js` dengan lynx.
